@@ -1,0 +1,35 @@
+// imports
+@import 'partials/_reset';
+@import 'partials/colors';
+@import 'partials/fonts';
+
+body{
+    background-color: $dark;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    .note-add-icon{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        background-image: linear-gradient(to right, #134E5E,#71B280);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+        &:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+}
+.bg-color{
+    background-color: $bgColor;
+}
+.card{
+    &:hover{
+        transform: scale(1.01);
+    }
+}

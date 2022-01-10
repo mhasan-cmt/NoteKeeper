@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteKeeper | Home</title>
+
+    <!-- External CSS Linkup -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <script defer src="./node_modules/@fortawesome/fontawesome-free/js/brands.min.js"></script>
+    <script defer src="./node_modules/@fortawesome/fontawesome-free/js/solid.min.js"></script>
+    <script defer src="./node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js"></script>
+</head>
+<body>
+    <div class="note-add-icon" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="fas fa-plus text-light"></i>
+    </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Keep Notes</span>
+    </div>
+  </nav>
+    <main class="container container-fluid">
+
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-color text-light">
+              <h5 class="modal-title" id="staticBackdropLabel">Keep a Note</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="#">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="title" placeholder="name@example.com">
+                  <label for="floatingInput">Title</label>
+                </div>
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="Add your notes here" id="desc"></textarea>
+                  <label for="floatingTextarea">Description</label>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearFields()">Close</button>
+              <button type="button" class="btn bg-warning" data-bs-dismiss="modal" onclick="addNoteTrigger()">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal  -->
+
+      <!-- Cards Wrapper  -->
+      <div id="card-container"></div>
+      <!-- Cards Wrapper  -->
+    </main>
+    
+
+    <!-- Bootstrap js  -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- External Js Linkup -->
+    <script src="./assets/js/app.js"></script>
+    <script>
+      var notes = [];
+
+    let cardContainer = document.getElementById('card-container');
+    cardContainer.className = 'row';
+    let createNoteCard = (note)=>{
+      let card = document.createElement('div');
+      card.className='card shadow cursor-pointer col-md-6';
+
+      let cardBody = document.createElement('div');
+      cardBody.className='card-body text-center';
+
+      let title = document.createElement('h5');
+      title.innerText = note.title;
+
+
+      let cardText = document.createElement('p');
+      cardText.innerText = note.desc;
+      cardText.className = 'card-text';
+
+      cardBody.appendChild(title);
+      cardBody.appendChild(cardText);
+
+      card.appendChild(cardBody);
+      cardContainer.appendChild(card);
+    }
+
+  let addNote =(noteTitle, noteDesc)=>{
+    let obj = {};
+    obj["title"]=noteTitle;
+    obj["desc"] = noteDesc;
+    notes.push(obj);
+    createNoteCard(obj);
+  }
+
+  let addNoteTrigger=()=>{
+    let noteTitle = document.getElementById('title').value;
+    let noteDescription = document.getElementById('desc').value;
+
+    addNote(noteTitle, noteDescription);
+    clearFields();
+  }
+  let initialAllNotes = ()=>{
+    for(let a=0; a<=notes.length;a++){
+      createNoteCard(notes[a]);
+    }
+  }
+
+  let clearFields =()=>{
+    let noteTitle = document.getElementById('title');
+    let noteDescription = document.getElementById('desc');
+
+    noteTitle.value ="";
+    noteDescription.value = "";
+  }
+initialAllNotes();
+
+    </script>
+</body>
+</html>
