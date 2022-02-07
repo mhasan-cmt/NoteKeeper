@@ -61,6 +61,7 @@
       <div id="card-container"></div>
       <!-- Cards Wrapper  -->
     </main>
+
     
 
     <!-- Bootstrap js  -->
@@ -68,13 +69,23 @@
     <!-- External Js Linkup -->
     <script src="./assets/js/app.js"></script>
     <script>
-      var notes = [];
+      var notes = [
+        {
+          "title":'this is a title',
+          "desc": 'this is a description',
+          "mimg":'./assets/images/nature.jpg'
+        }
+      ];
 
     let cardContainer = document.getElementById('card-container');
     cardContainer.className = 'row';
     let createNoteCard = (note)=>{
       let card = document.createElement('div');
-      card.className='card shadow cursor-pointer col-md-6';
+      card.className='card shadow cursor-pointer col-md-3';
+
+      let cardImage = document.createElement('img');
+      cardImage.className = 'card-img-top';
+      cardImage.src = notes.mimg;
 
       let cardBody = document.createElement('div');
       cardBody.className='card-body text-center';
@@ -90,6 +101,7 @@
       cardBody.appendChild(title);
       cardBody.appendChild(cardText);
 
+      card.appendChild(cardImage);  
       card.appendChild(cardBody);
       cardContainer.appendChild(card);
     }
